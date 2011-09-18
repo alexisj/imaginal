@@ -1,6 +1,6 @@
 <?php
 
-namespace Msi\GalleryBundle\imaginal\src\Imaginal;
+namespace Imaginal;
 
 class Imaginal
 {
