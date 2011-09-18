@@ -11,6 +11,8 @@ class Imaginal
     private $dir;
     private $filename;
     private $ext;
+    private $qualityPng = 0;
+    private $qualityJpg = 100;
 
     public function __construct($dir, $filename)
     {
@@ -99,14 +101,21 @@ class Imaginal
         $this->dstImage = $newImage;
     }
 
+    // 0-100
+    public function setQuality($a)
+    {
+        $this->qualityJpg = $a;
+        $this->qualityPng = round(abs((9 * $a) / 100 - 9));
+    }
+
     public function save($prefix = '')
     {
         if ($this->ext === 'png')
-            return imagepng($this->dstImage, $this->dir.'/'.$prefix.$this->filename, 0);
+            return imagepng($this->dstImage, $this->dir.'/'.$prefix.$this->filename, $this->qualityPng);
         else if ($this->ext === 'gif')
             return imagegif($this->dstImage, $this->dir.'/'.$prefix.$this->filename);
         else
-            return imagejpeg($this->dstImage, $this->dir.'/'.$prefix.$this->filename, 100);
+            return imagejpeg($this->dstImage, $this->dir.'/'.$prefix.$this->filename, $this->qualityJpg);
     }
 
     public function saveAs($dir, $prefix = '')
@@ -115,10 +124,10 @@ class Imaginal
             throw new \Exception($dir.' is not a directory.');
 
         if ($this->ext === 'png')
-            return imagepng($this->dstImage, $dir.'/'.$prefix.$this->filename, 0);
+            return imagepng($this->dstImage, $dir.'/'.$prefix.$this->filename, $this->qualityPng);
         else if ($this->ext === 'gif')
             return imagegif($this->dstImage, $dir.'/'.$prefix.$this->filename);
         else
-            return imagejpeg($this->dstImage, $dir.'/'.$prefix.$this->filename, 100);
+            return imagejpeg($this->dstImage, $dir.'/'.$prefix.$this->filename, $this->qualityJpg);
     }    
 }
