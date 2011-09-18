@@ -46,29 +46,45 @@ class Imaginal
     public function resize($width, $height)
     {
         if ($this->srcH < $this->srcW) {
-            $ratio = $this->srcH / $width;
-            $h = $this->srcH / $ratio;
-            $w = $this->srcW / $ratio;
-            $x = ($w - $width) / -2;
-            $y = ($h - $height) / -2;
+            if ($width < $height) {
+                $ratio = $this->srcH / $height;
+                $h = $this->srcH / $ratio;
+                $w = $this->srcW / $ratio;
+                $x = ($w - $width) / -2;
+                $y = ($h - $height) / -2;
+            } else {
+                $ratio = $this->srcH / $width;
+                $h = $this->srcH / $ratio;
+                $w = $this->srcW / $ratio;
+                $x = ($w - $width) / -2;
+                $y = ($h - $height) / -2;
+            }
         } else if ($this->srcH > $this->srcW) {
-            $ratio = $this->srcW / $height;
-            $h = $this->srcH / $ratio;
-            $w = $this->srcW / $ratio;
-            $y = ($h - $height) / -2;
-            $x = ($w - $width) / -2;
+            if ($width > $height) {
+                $ratio = $this->srcW / $width;
+                $h = $this->srcH / $ratio;
+                $w = $this->srcW / $ratio;
+                $y = ($h - $height) / -2;
+                $x = ($w - $width) / -2;
+            } else {
+                $ratio = $this->srcW / $height;
+                $h = $this->srcH / $ratio;
+                $w = $this->srcW / $ratio;
+                $y = ($h - $height) / -2;
+                $x = ($w - $width) / -2;
+            }
         } else if ($height < $width) {
-            $ratio = $this->srcH / $height;
-            $h = $this->srcH / $ratio;
-            $w = $this->srcW / $ratio;
-            $x = ($w - $width) / -2;
-            $y = 0;
-        } else if ($height > $width) {
             $ratio = $this->srcH / $width;
             $h = $this->srcH / $ratio;
             $w = $this->srcW / $ratio;
             $x = 0;
-            $y = ($h - $height) / -2;          
+            $y = ($h - $height) / -2; 
+        } else if ($height > $width) {
+            $ratio = $this->srcH / $height;
+            $h = $this->srcH / $ratio;
+            $w = $this->srcW / $ratio;
+            $x = ($w - $width) / -2;
+            $y = 0;                     
         } else {
             $h = $height;
             $w = $width;
