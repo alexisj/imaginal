@@ -11,7 +11,7 @@ class Imaginal
     private $dir;
     private $filename;
     private $ext;
-    private $qualityPng = 0;
+    private $qualityPng = 1;
     private $qualityJpg = 100;
 
     public function __construct($dir, $filename)
