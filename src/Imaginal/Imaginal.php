@@ -2,8 +2,6 @@
 
 namespace Imaginal;
 
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
-
 class Imaginal
 {
     private $srcImage;
@@ -17,13 +15,13 @@ class Imaginal
     public function __construct($dir, $filename)
     {
         if (!extension_loaded('gd'))
-            throw new FileException('GD library is not enabled.');
+            throw new \Exception('GD library is not enabled.');
 
         if (!is_dir($dir))
-            throw new FileException($dir.' is not a directory.');
+            throw new \Exception($dir.' is not a directory.');
 
         if (!is_file($dir.'/'.$filename))
-            throw new FileException($dir.'/'.$filename.' is not a file.');
+            throw new \Exception($dir.'/'.$filename.' is not a file.');
 
         $ext = strtolower(substr(strrchr($filename,'.'),1));
 
@@ -34,7 +32,7 @@ class Imaginal
         } else if ($ext === 'gif') {
             $srcImage = imagecreatefromgif($dir.'/'.$filename);
         } else {
-            throw new FileException('File must be either jpeg or png or gif.');
+            die('File must be either jpeg or png or gif.');
         }
 
         $this->srcW = imagesx($srcImage);
@@ -98,7 +96,7 @@ class Imaginal
     public function saveAs($dir, $prefix = '')
     {
         if (!is_dir($dir))
-            throw new FileException($dir.' is not a directory.');
+            throw new \Exception($dir.' is not a directory.');
 
         if ($this->ext === 'png')
             return imagepng($this->dstImage, $dir.'/'.$prefix.$this->filename, 0);
