@@ -6,3 +6,7 @@ Add to deps:
 Install vendors:
 
     php bin/vendors install
+
+Register namespace:
+
+    'Imaginal' => __DIR__.'/../vendor/imaginal/src',
