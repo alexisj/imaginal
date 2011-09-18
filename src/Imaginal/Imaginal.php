@@ -1,6 +1,6 @@
 <?php
 
-namespace Imaginal;
+namespace Msi\GalleryBundle\imaginal\src\Imaginal;
 
 class Imaginal
 {
@@ -15,7 +15,7 @@ class Imaginal
     public function __construct($dir, $filename)
     {
         if (!extension_loaded('gd'))
-            throw new \Exception('GD library is not enabled.');
+            throw new \Exception('The GD library is not enabled.');
 
         if (!is_dir($dir))
             throw new \Exception($dir.' is not a directory.');
@@ -32,7 +32,7 @@ class Imaginal
         } else if ($ext === 'gif') {
             $srcImage = imagecreatefromgif($dir.'/'.$filename);
         } else {
-            die('File must be either jpeg or png or gif.');
+            die('The file must be either jpeg or png or gif.');
         }
 
         $this->srcW = imagesx($srcImage);
