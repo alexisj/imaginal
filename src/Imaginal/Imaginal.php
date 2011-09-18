@@ -25,7 +25,7 @@ class Imaginal
         if (!is_file($dir.'/'.$filename))
             throw new \Exception($dir.'/'.$filename.' is not a file.');
 
-        $ext = strtolower(substr(strrchr($filename,'.'),1));
+        $ext = strtolower(substr(strrchr($filename,'.'), 1));
 
         if ($ext === 'jpg' || $ext === 'jpeg') {
             $srcImage = imagecreatefromjpeg($dir.'/'.$filename);
